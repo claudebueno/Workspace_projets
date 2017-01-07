@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GestionSportifs/src/com/formation/ihm/JFrameEnregistrerSportif&apos; to &apos;JFrameEnregistrerSportif.form&apos;" description="Rename resource &apos;JFrameEnregistrerSportif&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/com/formation/ihm/JFrameEnregistrerSportif" name="JFrameEnregistrerSportif.form" stamp="1483777545723" updateReferences="true"/>
+</session>
