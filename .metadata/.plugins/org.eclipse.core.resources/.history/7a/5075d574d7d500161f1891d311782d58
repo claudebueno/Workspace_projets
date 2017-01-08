@@ -15,7 +15,7 @@ public class ConnexionDB {
 	static Connection conn = null;
 	Statement stmt = null;
 	final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	final String DB_URL = "jdbc:postgresql://localhost:5432/sportif";
+	final String DB_URL = "jdbc:postgresql://localhost:5432/tp1";
 	String sql;
 	ResultSet rs;
 
