@@ -1,4 +1,4 @@
-package com.gestionsportif.log;
+package com.formation.log;
 
 import java.io.File;
 import java.io.FileWriter;

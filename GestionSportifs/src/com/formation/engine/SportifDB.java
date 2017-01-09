@@ -1,10 +1,9 @@
-package com.gestionsportif.engine;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.gestionsportif.database.DataBase;
-import com.gestionsportif.log.Log;
+import com.formation.bdd.DataBase;
+import com.formation.log.Log;
+
 
 public class SportifDB {
 	private DataBase db;
