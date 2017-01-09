@@ -275,16 +275,15 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         btnAfficheListeSportifs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
              	
-            	 
+            	SportifsTabFrame aff;
 				try {
-					SportifsTabFrame aff = new SportifsTabFrame();
-					aff.setVisible(true);
-            		aff.setTitle("Enregistrement Sportif");
+					aff = new SportifsTabFrame();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-            		
+            		aff.setVisible(true);
+            		aff.setTitle("Enregistrement Sportif");
             }
         });
 

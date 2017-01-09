@@ -1,4 +1,4 @@
-package com.formation.ihm;
+package com.gestionsportif.ihm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import com.formation.log.Log;
+import com.gestionsportif.engine.SportifDB;
+import com.gestionsportif.log.Log;
 
 public class SportifsTabFrame extends JFrame {
     /**
@@ -20,18 +21,20 @@ public class SportifsTabFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Tableau des sportifs");
         this.setSize(800, 500);
-        com.formation.engine.SportifDB sdb = new com.formation.engine.SportifDB(); 
+        SportifDB sdb = new SportifDB(); 
         ArrayList<ArrayList<String>> sportifs = sdb.affiche();
         Object[][] data = new Object[sportifs.size()][6];
         for (int i=0;i<sportifs.size();i++) {
         	for (int j=0;j<6;j++) {
- 
-
+        		if (j==3) {
+        			data[i][j] = 
+        		}
+        		else {
         			data[i][j] = sportifs.get(i).get(j);
-        		
+        		}
         	}    
         }
-      Log.write("Affichage des sportifs dans un tableau");
+        Log.write("Affichage des sportifs dans un tableau");
         String  title[] = {"Id", "Nom", "Prénom", "Adresse", "Sexe", "Sports"};
         JTable tableau = new JTable(data, title);
         this.getContentPane().add(new JScrollPane(tableau)); 

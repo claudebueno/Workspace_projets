@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.swing.ButtonGroup;
@@ -16,7 +15,7 @@ import com.formation.engine.Sportif;
 import com.formation.engine.SportifDB;
 
 
-public class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener, ItemListener  {
+public abstract class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener, ItemListener  {
 
     public JFrameEnregistrerSportif() {
         initComponents();
@@ -275,16 +274,9 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         btnAfficheListeSportifs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
              	
-            	 
-				try {
-					SportifsTabFrame aff = new SportifsTabFrame();
-					aff.setVisible(true);
+            	JFrameAfficherSportifs aff = new JFrameAfficherSportifs();
+            		aff.setVisible(true);
             		aff.setTitle("Enregistrement Sportif");
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            		
             }
         });
 

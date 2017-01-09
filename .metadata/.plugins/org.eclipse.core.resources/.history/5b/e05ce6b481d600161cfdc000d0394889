@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import com.formation.log.Log;
+import com.gestionsportif.engine.SportifDB;
+import com.gestionsportif.log.Log;
 
 public class SportifsTabFrame extends JFrame {
     /**
@@ -31,7 +32,7 @@ public class SportifsTabFrame extends JFrame {
         		
         	}    
         }
-      Log.write("Affichage des sportifs dans un tableau");
+        Log.write("Affichage des sportifs dans un tableau");
         String  title[] = {"Id", "Nom", "Prénom", "Adresse", "Sexe", "Sports"};
         JTable tableau = new JTable(data, title);
         this.getContentPane().add(new JScrollPane(tableau)); 
