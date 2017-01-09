@@ -1,10 +1,10 @@
-package com.gestionsportif.engine;
+package com.formation.engine;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.gestionsportif.database.DataBase;
-import com.gestionsportif.log.Log;
+import com.formation.bdd.DataBase;
+import com.formation.log.Log;
 
 public class SportifDB {
 	private DataBase db;
@@ -24,25 +24,9 @@ public class SportifDB {
 	public void afficheConsole() throws SQLException {
 		Log.write(db.selectStringRequest("SELECT * FROM tp1.sportifs"));
 	}
-	/*public ArrayList<ArrayList<String>> affiche(int id) throws SQLException {
-		Log.write("Affiche un sportif");
-		ArrayList<String> sportif = new ArrayList<String>();
-		ArrayList<ArrayList<String>> request= db.selectRequest("SELECT * FROM tp1.sportifs WHERE id="+id);
-		for (ArrayList<String> s : sportifs) {
-			sportif=s;
-		}
-		return sportifs;
-		//return db.selectRequest("SELECT * FROM tp1.sportifs WHERE id="+id);
-		
-	}*/
-	public ArrayList<String> affiche(int id) throws SQLException {
-		Log.write("Affiche un sportif");
-		ArrayList<String> sportif = new ArrayList<String>();
-		ArrayList<ArrayList<String>> request= db.selectRequest("SELECT * FROM tp1.sportifs WHERE id="+id);
-		for (ArrayList<String> s : request) {
-			sportif=s;
-		}
-		return sportif;
+	public ArrayList<ArrayList<String>> affiche(int id) throws SQLException {
+		Log.write("Affiche le sportif");
+		return db.selectRequest("SELECT * FROM tp1.sportifs WHERE id="+id);	
 	}
 	// Ajoute une personne
 	public void ajouter(Sportif s) throws SQLException {

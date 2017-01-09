@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.formation.bean.Sportif"/>
+<fullyQualifiedTypeName name="com.gestionsportif.log.Log"/>
+<fullyQualifiedTypeName name="com.formation.bdd.DataBase"/>
+<fullyQualifiedTypeName name="com.formation.log.Log"/>
 </qualifiedTypeNameHistroy>
