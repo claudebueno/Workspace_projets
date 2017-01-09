@@ -15,7 +15,7 @@ import com.formation.engine.Sportif;
 import com.formation.engine.SportifDB;
 
 
-public class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener, ItemListener  {
+public abstract class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener, ItemListener  {
 
     public JFrameEnregistrerSportif() {
         initComponents();
@@ -260,9 +260,9 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         		
         		System.out.println("Ajout d'un sportif");
         		
-/*        		Sportif sportif = new Sportif(nom, prenom, adresse, sexe1, sport);
+        		Sportif sportif = new Sportif(nom, prenom, adresse, sexe1, sport);
         		
-        		Controleur.GetInstance().ajouter(sportif);*/
+        		Controleur.GetInstance().ajouter(sportif);
                 
             }
         });

@@ -65,7 +65,7 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         sexeFemme.addItemListener(this);
         
 
-/*        @Override
+        @Override
         private void actionPerformed(ActionEvent e) {
           System.out.println("Clic sur le bouton : " + e.getActionCommand());
         }
@@ -89,7 +89,7 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         	    }
         	  }
         	  return result;
-        	}*/
+        	}
         
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -260,9 +260,9 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         		
         		System.out.println("Ajout d'un sportif");
         		
-/*        		Sportif sportif = new Sportif(nom, prenom, adresse, sexe1, sport);
+        		Sportif sportif = new Sportif(nom, prenom, adresse, sexe1, sport);
         		
-        		Controleur.GetInstance().ajouter(sportif);*/
+        		Controleur.GetInstance().ajouter(sportif);
                 
             }
         });

@@ -15,7 +15,7 @@ import com.formation.engine.Sportif;
 import com.formation.engine.SportifDB;
 
 
-public class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener, ItemListener  {
+public abstract class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener, ItemListener  {
 
     public JFrameEnregistrerSportif() {
         initComponents();
