@@ -2,18 +2,29 @@ package com.formation.ihm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.SQLException;
+import java.util.Enumeration;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 
 import com.formation.bdd.Controleur;
-import com.formation.bean.Sportif;
+import com.formation.engine.Adresse;
+import com.formation.engine.Sportif;
+import com.formation.engine.SportifDB;
 
-public class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener {
+
+public class JFrameEnregistrerSportif extends javax.swing.JFrame implements ActionListener, ItemListener  {
 
     public JFrameEnregistrerSportif() {
         initComponents();
     }
 
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+                         
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
@@ -33,14 +44,54 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        sexeHomme = new javax.swing.JRadioButton();
-        sexeFemme = new javax.swing.JRadioButton();
         nom = new javax.swing.JTextField();
         prenom = new javax.swing.JTextField();
         adresse = new javax.swing.JTextField();
         jInternalFrame3 = new javax.swing.JInternalFrame();
         btnAnnuler = new javax.swing.JButton();
         btnValider = new javax.swing.JButton();
+        btnAfficheListeSportifs = new javax.swing.JButton();
+
+        
+        // Groupe de JRadioButton - SEXE
+        JRadioButton sexeHomme = new javax.swing.JRadioButton();
+        JRadioButton sexeFemme = new javax.swing.JRadioButton();
+        ButtonGroup sexe = new ButtonGroup();
+        sexe.add(sexeHomme);
+        sexe.add(sexeFemme);
+        
+        sexeHomme.addActionListener(this);
+        sexeFemme.addActionListener(this);
+        sexeHomme.addItemListener(this);
+        sexeFemme.addItemListener(this);
+        
+
+/*        @Override
+        private void actionPerformed(ActionEvent e) {
+          System.out.println("Clic sur le bouton : " + e.getActionCommand());
+        }
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+          System.out.print("Bouton " + ((JRadioButton) e.getItem()).getActionCommand());
+          if (e.getStateChange() == ItemEvent.DESELECTED)
+            System.out.println(" deselectionne");
+          if (e.getStateChange() == ItemEvent.SELECTED)
+            System.out.println(" selectionne");
+        }
+        
+        public static JRadioButton getBoutonSelectionne(ButtonGroup group) {
+        	  JRadioButton result = null;
+        	  for (Enumeration e1 = group.getElements(); e1.hasMoreElements();) {
+        	    JRadioButton bouton = (JRadioButton) e1.nextElement();
+        	    if (bouton.getModel() == group.getSelection()) {
+        	      result = bouton;
+        	      break;
+        	    }
+        	  }
+        	  return result;
+        	}*/
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,7 +115,7 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
 
         sportWaterpolo.setText("Waterpolo");
 
-        jLabel5.setText("NOM");
+        jLabel5.setText("SPORT");
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -142,7 +193,6 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
             }
         });
 
-        adresse.setToolTipText("");
         adresse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adresseActionPerformed(evt);
@@ -159,9 +209,9 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
                     .addComponent(adresse)
                     .addComponent(nom)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                     .addGroup(jInternalFrame2Layout.createSequentialGroup()
                         .addComponent(sexeHomme)
                         .addGap(18, 18, 18)
@@ -196,16 +246,56 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         jInternalFrame3.setVisible(true);
 
         btnAnnuler.setText("Annuler");
+        btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		
+        		System.out.println("test bouton Annuler");
+                
+            }
+        });
 
+        // BOUTON VALIDER
         btnValider.setText("Valider");
-        btnValider.addActionListener(this);
+        btnValider.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		
+        		System.out.println("Ajout d'un sportif");
+        		
+/*        		Sportif sportif = new Sportif(nom, prenom, adresse, sexe1, sport);
+        		
+        		Controleur.GetInstance().ajouter(sportif);*/
+                
+            }
+        });
+
+        
+        // BOUTON AFFICHER LISTE des SPORTIFS
+        btnAfficheListeSportifs.setText("Afficher Sportifs");
+        btnAfficheListeSportifs.setActionCommand("btnAfficheListeSportifs");
+        btnAfficheListeSportifs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+             	
+            	 
+				try {
+					SportifsTabFrame aff = new SportifsTabFrame();
+					aff.setVisible(true);
+            		aff.setTitle("Enregistrement Sportif");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            		
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrame3Layout = new javax.swing.GroupLayout(jInternalFrame3.getContentPane());
         jInternalFrame3.getContentPane().setLayout(jInternalFrame3Layout);
         jInternalFrame3Layout.setHorizontalGroup(
             jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnAfficheListeSportifs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnValider, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAnnuler, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +306,8 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
             .addGroup(jInternalFrame3Layout.createSequentialGroup()
                 .addGroup(jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnValider)
-                    .addComponent(btnAnnuler))
+                    .addComponent(btnAnnuler)
+                    .addComponent(btnAfficheListeSportifs))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -268,63 +359,32 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }                 
 
-    private void sexeHommeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexeHommeActionPerformed
+    private void adresseActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-    }//GEN-LAST:event_sexeHommeActionPerformed
+    }                                       
 
-    private void sexeFemmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexeFemmeActionPerformed
+    private void prenomActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
-    }//GEN-LAST:event_sexeFemmeActionPerformed
+    }                                      
 
-    private void prenomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prenomActionPerformed
+    private void sexeFemmeActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_prenomActionPerformed
+    }                                         
 
-    private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
+    private void sexeHommeActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_adresseActionPerformed
+    }                                         
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameEnregistrerSportif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameEnregistrerSportif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameEnregistrerSportif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameEnregistrerSportif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameEnregistrerSportif().setVisible(true);
-            }
-        });
-    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JTextField adresse;
+    private javax.swing.JButton btnAfficheListeSportifs;
     private javax.swing.JButton btnAnnuler;
     private javax.swing.JButton btnValider;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
@@ -336,6 +396,7 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nom;
     private javax.swing.JTextField prenom;
+    private javax.swing.ButtonGroup sexe;
     private javax.swing.JRadioButton sexeFemme;
     private javax.swing.JRadioButton sexeHomme;
     private javax.swing.JCheckBox sportAviron;
@@ -347,14 +408,10 @@ public class JFrameEnregistrerSportif extends javax.swing.JFrame implements Acti
     private javax.swing.JCheckBox sportRugby;
     private javax.swing.JCheckBox sportVoile;
     private javax.swing.JCheckBox sportWaterpolo;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("test clic ok");
 		
-		Sportif sportif = new Sportif(prenom.getText(),nom.getText(),adresse.getText());
-		
-		Controleur.GetInstance().ajouter(sportif);
 	}
 }
